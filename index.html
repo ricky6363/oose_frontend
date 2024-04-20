@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Recruitment</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Your CSS styles for the login modal here */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url('background-image.jpg'); /* Replace 'background-image.jpg' with the path to your image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        /* Modal content styles */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            border: 1px solid #fefcfc;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Close button styles */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Container styles */
+        .container {
+            padding: 16px;
+        }
+
+        /* Input field styles */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ffffff;
+            box-sizing: border-box;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 20%;
+        }
+        .button-container button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 20px 50px; /* Increase padding for bigger buttons */
+            margin: 0 50px; /* Add margin between buttons */
+            border: none;
+            cursor: pointer;
+            font-size: 30px; /* Increase font size for bigger buttons */
+            border-radius: 40px; /* Add rounded corners */
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Cancel button styles */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        /* Remember me checkbox styles */
+        label {
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Change styles for small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn {
+                width: 100%;
+            }
+        } /* Your CSS styles for the login modal here */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    
+        header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+    
+        header img.logo {
+            max-width: 200px;
+            height: auto;
+        }
+    
+        h2 {
+            text-align: center;
+        }
+    
+        .main-content {
+            text-align: center;
+            padding: 50px 0;
+        }
+    
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+    
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+    
+        button:hover {
+            opacity: 0.8;
+        }
+        .contact-details h3,
+.about-details h3 {
+    font-weight: bold;
+    font-size: 20px;
+    color: #faf3f3; /* Adjust color as needed */
+}
+
+.contact-details p,
+.about-details p {
+    font-size: 16px;
+    color: #faf8f8; /* Adjust color as needed */
+}
+
+
+    
+        footer {
+            background-color: #000000;
+            padding: 2px 0;
+            text-align: center;
+        }
+        /* Add this CSS for aligning navigation links to the right */
+.footer-nav {
+    float: right;
+}
+
+.footer-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav li {
+    display: inline;
+    margin-left: 20px;
+}
+
+/* Add this CSS for centering the copyright text */
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+}
+.main-content {
+    text-align: center;
+    padding: 50px 0;
+}
+
+    
+        .contact-details {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    
+        .contact-details p {
+            margin: 5px 0;
+        }
+    
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+    
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            width: 80%;
+            max-width: 400px;
+        }
+    
+        .close {
+            color: #fefbfb;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    
+        .imgcontainer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    
+        .imgcontainer img.avatar {
+            width: 250px; /* Set the width of the avatar */
+            height: 250px; /* Set the height of the avatar */
+            border-radius: 200%; /* Make it circular */
+        }
+        /* Add this CSS for hiding and styling the details initially */
+.contact-details,
+.about-details {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-details h2,
+.about-details h2 {
+    margin-bottom: 10px;
+}
+
+.contact-details p,
+.about-details p {
+    margin: 5px 0;
+}
+table {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #4c4747;
+}
+.slideshow-container {
+    max-width: 500px;
+    position: relative;
+    margin: auto;
+}
+
+/* Slides */
+.mySlides {
+    display: none;
+}
+
+/* Next and Previous Buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Fade Animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="job-recruitment-high-resolution-logo-transparent.png" alt="Job Recruitment Logo" class="logo">
+        </div>
+    </header>
+    <h2>Welcome to Job Recruitment</h2>
+    <div class="slideshow-container">
+        <!-- Slides -->
+        <div class="mySlides fade">
+            <img src="WhatsApp Image 2024-04-20 at 20.56.12_1e430e93.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="WhatsApp Image 2024-04-20 at 20.51.43_0916436d.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="WhatsApp Image 2024-04-20 at 20.48.55_185cb82a.jpg" style="width:100%">
+        </div>
+            <!-- Next and Previous Buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    
+    <div class="container">
+        
+        <!-- Your main content goes here -->
+        <div class="button-container">
+            <button onclick="openModal()">Login</button>
+            <button onclick="window.location.href='signup.html'">Sign Up</button>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+               
+                    <h2><a href="#contact" onclick="showContactDetails()">Contact Us</a></h2>
+                    <h2><a href="#about" onclick="showAboutDetails()">About Us</a></h2>
+                
+            </nav>
+            <div id="contact-details" class="contact-details">
+                <h3>Contact Us</h3>
+    <table>
+        <tr>
+            <th>Register No</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td>311121104005</td>
+            <td>Amala Shwetah Louis Kishore</td>
+            <td>amalashwetahlouiskishore.25cs@licet.ac.in</td>
+        </tr>
+        <tr>
+            <td>311121104054</td>
+            <td>Shynuka</td>
+            <td>shynuka.25cs@licet.ac.in</td>
+        </tr>
+        <tr>
+            <td>311121104303</td>
+            <td>Ricky Davidson</td>
+            <td>rickydavidson.25cs@licet.ac.in</td>
+        </tr>
+        <tr>
+            <td>311121104024</td>
+            <td>Gibson</td>
+            <td>gibson.25cs@licet.ac.in</td>
+        </tr>
+        <tr>
+            <td>311121104001</td>
+            <td>Adelin</td>
+            <td>adelinbrianna.25cs@licet.ac.in</td>
+        </tr>
+    </table>
+            </div>
+            <div id="about-details" class="about-details">
+                <h3>About Us</h3>
+                <p>We are committed to revolutionizing the job recruitment process and connecting job seekers with their dream jobs.</p>
+            </div>
+            <p class="copyright">Copyright © 2024 Your Company. All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+    <!-- Login Modal -->
+    <div id="id01" class="modal">
+        <form class="modal-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
+                <img src="Avatar-PNG-Free-Download.png" alt="Avatar" class="avatar">
+            </div>
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="closeModal()" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript for opening and closing the login modal
+        var modal = document.getElementById('id01');
+
+        // Open the modal
+        function openModal() {
+            modal.style.display = 'block';
+        }
+
+        // Close the modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+        
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    
+
+        
+        // JavaScript to show/hide contact and about details
+function showContactDetails() {
+    var contactDetails = document.getElementById("contact-details");
+    var aboutDetails = document.getElementById("about-details");
+
+    contactDetails.style.display = "block";
+    aboutDetails.style.display = "none";
+}
+
+function showAboutDetails() {
+    var contactDetails = document.getElementById("contact-details");
+    var aboutDetails = document.getElementById("about-details");
+
+    contactDetails.style.display = "none";
+    aboutDetails.style.display = "block";
+}
+ // Slideshow JavaScript
+ var slideIndex = 0;
+ showSlides();
+
+ function showSlides() {
+     var i;
+     var slides = document.getElementsByClassName("mySlides");
+     for (i = 0; i < slides.length; i++) {
+         slides[i].style.display = "none";
+     }
+     slideIndex++;
+     if (slideIndex > slides.length) {slideIndex = 1}
+     slides[slideIndex-1].style.display = "block";
+     setTimeout(showSlides, 3000); // Change image every 3 seconds
+ }
+
+ function plusSlides(n) {
+     showSlides(slideIndex += n);
+ }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Job Application Signup</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 100vh;
+            background-color: #ffffff;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 90%;
+            overflow: hidden;
+            z-index: -1; /* Ensure the video is behind other content */
+        }
+
+        video {
+            min-width: 6%;
+            min-height: 70%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .form-container {
+            max-height: 85vh; /* Maximum height of the form container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            width: 100%;
+            max-width: 580px; /* Set maximum width for better readability */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 300px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .panel {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #04AA6D;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+        header {
+            background-color: #fff;
+            padding: 0px 3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure the header stays above other content */
+        }
+
+        header img.logo {
+            max-width: 90px;
+            height: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #04AA6D;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Logo -->
+        <div>
+            <img src="job-recruitment-high-resolution-logo-transparent.png" alt="Logo" class="logo">
+        </div>
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Add other navigation links here -->
+            </ul>
+        </nav>
+    </header>
+  
+    <main>
+        <div class="video-container">
+            <video autoplay loop muted>
+                <source src="WhatsApp Video 2024-04-20 at 14.20.35_cd87362e.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <!-- Add another video container -->
+        <div class="video-container" style="left: 60%;">
+            <video autoplay loop muted>
+                <source src="WhatsApp Video 2024-04-20 at 15.41.52_4cf50264.mp4" type="video/mp4"> <!-- Update the source with your video file -->
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div class="form-container">
+            <!-- Signup Form -->
+            <div class="panel register">
+                <br>
+                <h2>Sign Up</h2>
+                <form id="signupForm" action="signin.html" method="get">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" name="signupUsername" placeholder="Username" required>
+
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="example: username@gmail.com" pattern="[a-z]+@[a-z]+\.[a-z]{2,4}" required>
+
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required>
+
+                    <label for="signupMobile">Mobile Number</label>
+                    <input type="tel" id="signupMobile" name="signupMobile" placeholder="Mobile Number" maxlength="10" required>
+
+                    <label for="signupDOB">Date of Birth</label>
+                    <input type="date" id="signupDOB" name="signupDOB" placeholder="Date of Birth" required>
+
+                    <p>Gender:</p>
+                    <label for="male">
+                        <input type="radio" id="male" name="gender" value="male" required> Male
+                    </label>
+                    <label for="female">
+                        <input type="radio" id="female" name="gender" value="female"> Female
+                    </label>
+
+                    <div id="educationFields"></div> <!-- Container for education fields -->
+                    <button type="button" onclick="addEducation()">+ Add Education</button>
+
+                    <div id="experienceFields"></div> <!-- Container for experience fields -->
+                    <button type="button" onclick="addExperience()">+ Add Experience</button>
+
+                    <button type="button" onclick="undoAddEducation()">Undo Education</button>
+                    <button type="button" onclick="undoAddExperience()">Undo Experience</button>
+                
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+   
+
+    <script>
+        let educationHistory = [];
+        let experienceHistory = [];
+
+        function addEducation() {
+            const educationFieldsContainer = document.getElementById('educationFields');
+            const educationField = document.createElement('div');
+            educationField.classList.add('educationFieldsSet');
+            educationField.innerHTML = `
+                <hr>
+                <label for="educationName">Name of College/School</label>
+                <input type="text" id="educationName" name="educationName" placeholder="Enter Name of College/School" required>
+
+                <label for="graduationYear">Year of Graduation</label>
+                <input type="number" id="graduationYear" name="graduationYear" placeholder="Enter Year of Graduation" required>
+
+                <label for="marksPercentage">Marks in %</label>
+                <input type="number" id="marksPercentage" name="marksPercentage" placeholder="Enter Marks in %" required>
+            `;
+            educationFieldsContainer.appendChild(educationField);
+            educationHistory.push(educationField);
+        }
+
+        function addExperience() {
+            const experienceFieldsContainer = document.getElementById('experienceFields');
+            const experienceField = document.createElement('div');
+            experienceField.classList.add('experienceFieldsSet');
+            experienceField.innerHTML = `
+                <hr>
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Enter Company Name" required>
+
+                <label for="role">Role</label>
+                <input type="text" id="role" name="role" placeholder="Enter Role" required>
+
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" placeholder="Enter Description" required>
+
+                <label for="salary">Salary</label>
+                <input type="number" id="salary" name="salary" placeholder="Enter Salary" required>
+
+                <label for="yearsOfExperience">Years of Experience</label>
+                <input type="number" id="yearsOfExperience" name="yearsOfExperience" placeholder="Enter Years of Experience" required>
+            `;
+            experienceFieldsContainer.appendChild(experienceField);
+            experienceHistory.push(experienceField);
+        }
+
+        function undoAddEducation() {
+            if (educationHistory.length > 0) {
+                const educationFieldsContainer = document.getElementById('educationFields');
+                educationFieldsContainer.removeChild(educationHistory.pop());
+            }
+        }
+
+        function undoAddExperience() {
+            if (experienceHistory.length > 0) {
+                const experienceFieldsContainer = document.getElementById('experienceFields');
+                experienceFieldsContainer.removeChild(experienceHistory.pop());
+            }
+        }
+
+        function handleSignup() {
+            // Handle signup form submission
+        }
+    </script>
+</body>
+</html>
