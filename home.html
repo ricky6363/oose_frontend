@@ -156,29 +156,177 @@
 
 <!-- Search Form with Dropdown Menu -->
 <div class="search-form">
-  <form action="/search" method="get">
-    <input type="text" name="job" placeholder="Enter Job">
-    <input type="text" name="location" placeholder="Enter Location">
-    <div class="dropdown" onmouseover="showDropdown()">
-        <button class="dropbtn">Dropdown</button>
-        <div id="dropdown-content" class="dropdown-content">
-            <a href="#">Linkedin</a>
-            <a href="createorder.html">Razorpay</a>
-            <a href="#">Indeed</a>
-            <a href="#">Naukri</a>
-        </div>
-    </div>
-  </form>
-</div>
-
+    <form id="searchForm">
+      <input type="text" name="job" placeholder="Enter Job">
+      <input type="text" name="location" placeholder="Enter Location">
+      <div class="dropdown">
+          <input type="text" id="sources" name="sources" placeholder="Select Sources" readonly>
+          <div id="dropdown-content" class="dropdown-content">
+              <input type="checkbox" id="linkedin" name="linkedin" value="linkedin">
+              <label for="linkedin">LinkedIn</label><br>
+              <input type="checkbox" id="indeed" name="indeed" value="indeed">
+              <label for="indeed">Indeed</label><br>
+              <input type="checkbox" id="naukri" name="naukri" value="naukri">
+              <label for="naukri">Naukri</label><br>
+          </div>
+      </div>
+      <button type="submit">Search</button>
+    </form>
+  </div>  
 <!-- Note -->
-
-
+<div id="table-container">
+    <!-- Table will be dynamically generated here -->
+</div>
+<div id="Subscribe">
+    <!-- Subscription button will be dynamically generated here -->
+</div>
 <script>
-  function showDropdown() {
-    document.getElementById("dropdown-content").style.display = "block";
-  }
-</script>
+    function showDropdown() {
+        document.getElementById("dropdown-content").style.display = "block";
+    }
 
+    function updateSources() {
+        const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+        const sourcesInput = document.getElementById('sources');
+        const selectedSources = [];
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedSources.push(checkbox.value);
+            }
+        });
+        sourcesInput.value = selectedSources.join(', ');
+    }
+
+    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', updateSources);
+    });
+
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const keywords = document.querySelector('input[name="job"]').value;
+        const location = document.querySelector('input[name="location"]').value;
+
+        const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+        const selectedSources = [];
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedSources.push(checkbox.value);
+            }
+        });
+
+        if (selectedSources.includes('linkedin')) {
+            const url = `http://localhost:8080/api/ljobs/search?keywords=${encodeURIComponent(keywords)}&location=${encodeURIComponent(location)}`;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const responseData = JSON.parse(xhr.responseText);
+                    displayJobs(responseData);
+                } else {
+                    console.error('Failed to fetch LinkedIn jobs:', xhr.status);
+                }
+            };
+            xhr.send();
+        } else {
+            var isMember = localStorage.getItem('isMember');
+            if (isMember === 'true') {
+                console.log('User is a member');
+                console.log('Displaying jobs from other sources');
+                console.log('We are currently working on this feature. Please check back later.');
+            } else {
+                const tableContainer = document.getElementById('table-container');
+                tableContainer.style.pointerEvents = 'none';
+                tableContainer.style.opacity = '0.1';
+                const subscribeDiv = document.getElementById('Subscribe');
+                subscribeDiv.innerHTML = `
+                    <button id="sendOrderButton">Send Order</button>
+                    <div id="order-status"></div>
+                `;
+            }
+
+            document.getElementById("sendOrderButton").addEventListener("click", function() {
+                var orderData = {
+                    amount: 1000.0,
+                    currency: "INR",
+                    receipt: "receipt-123",
+                };
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "http://localhost:8080/api/v1/orders/order");
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            try {
+                                // Parse response (assuming JSON)
+                                var orderResponse = JSON.parse(xhr.responseText);
+                                console.log("Order sent successfully:", orderResponse);
+
+                                // Get order ID and store it in localStorage
+                                var orderId = orderResponse.orderId;
+                                localStorage.setItem("orderId", orderId);
+                                var keyId = orderResponse.keyId;
+                                localStorage.setItem("keyId", keyId);
+
+                                document.getElementById("order-status").innerText = "Order created successfully! Order ID: " + orderId;
+                                window.location.href = "/checkout.html";
+
+                            } catch (error) {
+                                console.error("Failed to parse response:", error);
+                                document.getElementById("order-status").innerText = "Failed to send order (parsing error)";
+                            }
+                        } else {
+                            console.error("Failed to send order:", xhr.status);
+                            document.getElementById("order-status").innerText = "Failed to send order (status: " + xhr.status + ")";
+                        }
+                    }
+                };
+
+                xhr.send(JSON.stringify(orderData));
+            });
+        }
+    });
+
+    function displayJobs(responseData) {
+        // Get the container where you want to display the table
+        const tableContainer = document.getElementById('table-container');
+
+        // Create a table element
+        const table = document.createElement('table');
+        table.classList.add('job-table');
+
+        // Create and append table header row
+        const headerRow = document.createElement('tr');
+        const headerCell1 = document.createElement('th');
+        headerCell1.textContent = 'Job Title';
+        const headerCell2 = document.createElement('th');
+        headerCell2.textContent = 'Hyperlink';
+        headerRow.appendChild(headerCell1);
+        headerRow.appendChild(headerCell2);
+        table.appendChild(headerRow);
+
+        // Create and append table rows with job data
+        responseData.forEach(job => {
+            const row = document.createElement('tr');
+            const cell1 = document.createElement('td');
+            cell1.textContent = job.jobTitle;
+            const cell2 = document.createElement('td');
+            const hyperlink = document.createElement('a');
+            hyperlink.textContent = 'Link';
+            hyperlink.href = job.hyperlink;
+            hyperlink.target = '_blank'; // Open link in a new tab
+            cell2.appendChild(hyperlink);
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            table.appendChild(row);
+        });
+
+        // Append the table to the container
+        tableContainer.innerHTML = ''; // Clear previous content
+        tableContainer.appendChild(table);
+    }
+</script>
 </body>
 </html>

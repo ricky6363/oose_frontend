@@ -195,7 +195,7 @@
             <div class="panel register">
                 <br>
                 <h2>Sign Up</h2>
-                <form id="signupForm" action="signin.html" method="get">
+                <form id="signupForm" onsubmit="event.preventDefault(); handleSignup();">
                     <label for="signupUsername">Username</label>
                     <input type="text" id="signupUsername" name="signupUsername" placeholder="Username" required>
 
@@ -204,9 +204,6 @@
 
                     <label for="signupPassword">Password</label>
                     <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required>
-
-                    <label for="signupMobile">Mobile Number</label>
-                    <input type="tel" id="signupMobile" name="signupMobile" placeholder="Mobile Number" maxlength="10" required>
 
                     <label for="signupDOB">Date of Birth</label>
                     <input type="date" id="signupDOB" name="signupDOB" placeholder="Date of Birth" required>
@@ -249,11 +246,17 @@
                 <label for="educationName">Name of College/School</label>
                 <input type="text" id="educationName" name="educationName" placeholder="Enter Name of College/School" required>
 
-                <label for="graduationYear">Year of Graduation</label>
-                <input type="number" id="graduationYear" name="graduationYear" placeholder="Enter Year of Graduation" required>
+                <label for="medium">Medium</label>
+                <input type="text" id="medium" name="medium" placeholder="English/Other" required>
+                
+                <label for="board">Board</label>
+                <input type="text" id="board" name="board" placeholder="University/State" required>
 
                 <label for="marksPercentage">Marks in %</label>
                 <input type="number" id="marksPercentage" name="marksPercentage" placeholder="Enter Marks in %" required>
+
+                <label for="graduationYear">Year of Graduation</label>
+                <input type="number" id="graduationYear" name="graduationYear" placeholder="Enter Year of Graduation" required>
             `;
             educationFieldsContainer.appendChild(educationField);
             educationHistory.push(educationField);
@@ -299,8 +302,73 @@
         }
 
         function handleSignup() {
-            // Handle signup form submission
+    // Get form data
+    const username = document.getElementById('signupUsername').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const dob = document.getElementById('signupDOB').value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const isMember = false;
+
+    // Initialize education data as JSON object
+    const educationData = [];
+
+    // Gather education data
+    const educationFields = document.querySelectorAll('.educationFieldsSet');
+    educationFields.forEach((field, index) => {
+        educationData[index] = {
+            "schoolOrCollegeName": field.querySelector('input[name="educationName"]').value,
+            "medium": field.querySelector('input[name="medium"]').value,
+            "board": field.querySelector('input[name="board"]').value,
+            "gradePercentage": parseInt(field.querySelector('input[name="marksPercentage"]').value),
+            "yearOfCompletion": parseInt(field.querySelector('input[name="graduationYear"]').value)
+        };
+    });
+    
+
+    // Initialize experience data as JSON object
+    const experienceData = [];
+
+    // Gather experience data
+    const experienceFields = document.querySelectorAll('.experienceFieldsSet');
+    experienceFields.forEach((field, index) => {
+        experienceData[index] = {
+            "companyName": field.querySelector('input[name="companyName"]').value,
+            "role": field.querySelector('input[name="role"]').value,
+            "description": field.querySelector('input[name="description"]').value,
+            "salary": parseInt(field.querySelector('input[name="salary"]').value),
+            "yearsOfExperience": parseInt(field.querySelector('input[name="yearsOfExperience"]').value)
+        };
+    });
+
+    // Construct JSON data
+    const jsonData = {
+        "username": username,
+        "email": email,
+        "password": password,
+        "dob": dob,
+        "gender": gender,
+        "isMember": isMember,
+        "education": educationData,
+        "experience": experienceData
+    };
+    console.log(jsonData);
+
+    // Send data to the server
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8080/api/users", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = xhr.responseText;
+            console.log(response);
+            window.location.href = "index.html";
+        } else {
+            // Handle error or other status codes here
         }
+    };
+    xhr.send(JSON.stringify(jsonData));
+}
     </script>
 </body>
 </html>

@@ -445,14 +445,14 @@ th {
 
     <!-- Login Modal -->
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="/action_page.php" method="post">
+        <form class="modal-content animate" onsubmit="event.preventDefault(); sendLoginData();">
             <div class="imgcontainer">
                 <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
                 <img src="Avatar-PNG-Free-Download.png" alt="Avatar" class="avatar">
             </div>
             <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label for="uname"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="uname" required>
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
                 <button type="submit">Login</button>
@@ -466,6 +466,7 @@ th {
             </div>
         </form>
     </div>
+    
 
     <script>
         // JavaScript for opening and closing the login modal
@@ -526,6 +527,41 @@ function showAboutDetails() {
  function plusSlides(n) {
      showSlides(slideIndex += n);
  }
+
+ function sendLoginData() {
+    var username = document.getElementsByName('uname')[0].value;
+    var password = document.getElementsByName('psw')[0].value;
+
+    var jsonData = {
+        "email": username,
+        "password": password
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8080/api/login", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            try {
+                var response = JSON.parse(xhr.responseText);
+                console.log("Login successful:", response);
+                var isMember = response.isMember;
+                localStorage.setItem("isMember", isMember);
+                localStorage.setItem("userEmail", response.userEmail);
+                window.location.href = "/home.html";
+                closeModal();
+            } catch (error) {
+                console.error("Failed to parse response:", error);
+                alert("Failed to login. Please try again.");
+            }
+        } else {
+            // Handle error or other status codes here
+        }
+    };
+
+    xhr.send(JSON.stringify(jsonData));
+}
 
     </script>
 </body>
