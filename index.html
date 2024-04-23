@@ -546,8 +546,7 @@ function showAboutDetails() {
             try {
                 var response = JSON.parse(xhr.responseText);
                 console.log("Login successful:", response);
-                var isMember = response.isMember;
-                localStorage.setItem("isMember", isMember);
+                localStorage.setItem("isMember", response.isMember);
                 localStorage.setItem("userEmail", response.userEmail);
                 window.location.href = "/home.html";
                 closeModal();

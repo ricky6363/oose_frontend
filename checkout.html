@@ -50,8 +50,6 @@ xhr.onreadystatechange = function () {
                 if (updateMembershipXhr.readyState === XMLHttpRequest.DONE) {
                     if (updateMembershipXhr.status === 200) {
                         console.log("Membership updated successfully!");
-                        localStorage.setItem("isMember", true);
-                        window.location.href = "/home.html";
                     } else {
                         console.error("Error updating membership:", updateMembershipXhr.status);
                         alert("Membership update failed. Please try again.");
@@ -59,7 +57,7 @@ xhr.onreadystatechange = function () {
                 }
             };
             updateMembershipXhr.send(data);
-
+            localStorage.setItem("isMember", true);
             window.location.href = "home.html";
         } else {
             console.error("Error verifying payment:", xhr.status);
