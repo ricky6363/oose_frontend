@@ -142,11 +142,11 @@
 
 <!-- Header -->
 <header>
-    <img src="job-recruitment-high-resolution-logo-transparent.png" alt="Job Recruitment Logo" class="logo">
+    <!-- <img src="job-recruitment-high-resolution-logo-transparent.png" alt="Job Recruitment Logo" class="logo"> -->
     
     <!-- Right-aligned dropdown -->
     <div class="dropdown-right">
-        <img src="Avatar-PNG-Free-Download.png" alt="Avatar" class="avatar">
+        <!-- <img src="Avatar-PNG-Free-Download.png" alt="Avatar" class="avatar"> -->
         <div class="dropdown-right-content">
             <a href="signin.html">My Account</a>
             <a href="index.html">Logout</a>
@@ -157,22 +157,12 @@
 <!-- Search Form with Dropdown Menu -->
 <div class="search-form">
     <form id="searchForm">
-      <input type="text" name="job" placeholder="Enter Job">
-      <input type="text" name="location" placeholder="Enter Location">
-      <div class="dropdown">
-          <input type="text" id="sources" name="sources" placeholder="Select Sources" readonly>
-          <div id="dropdown-content" class="dropdown-content">
-              <input type="checkbox" id="linkedin" name="linkedin" value="linkedin">
-              <label for="linkedin">LinkedIn</label><br>
-              <input type="checkbox" id="indeed" name="indeed" value="indeed">
-              <label for="indeed">Indeed</label><br>
-              <input type="checkbox" id="naukri" name="naukri" value="naukri">
-              <label for="naukri">Naukri</label><br>
-          </div>
-      </div>
-      <button type="submit">Search</button>
+        <input type="text" name="job" placeholder="Enter Job">
+        <input type="text" name="location" placeholder="Enter Location">
+        <input type="text" name="sourceInput" placeholder="LinkedIn/Indeed/Naukri">
+        <button type="submit">Search</button>
     </form>
-  </div>  
+</div>
 <!-- Note -->
 <div id="table-container">
     <!-- Table will be dynamically generated here -->
@@ -181,41 +171,50 @@
     <!-- Subscription button will be dynamically generated here -->
 </div>
 <script>
-    function showDropdown() {
-        document.getElementById("dropdown-content").style.display = "block";
-    }
+    // function showDropdown() {
+    //     document.getElementById("dropdown-content").style.display = "block";
+    // }
 
-    function updateSources() {
-        const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
-        const sourcesInput = document.getElementById('sources');
-        const selectedSources = [];
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedSources.push(checkbox.value);
-            }
+    // function updateSources() {
+    //     const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+    //     const sourcesInput = document.getElementById('sources');
+    //     const selectedSources = [];
+    //     checkboxes.forEach(checkbox => {
+    //         if (checkbox.checked) {
+    //             selectedSources.push(checkbox.value);
+    //         }
+    //     });
+    //     sourcesInput.value = selectedSources.join(', ');
+    // }
+
+    // document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
+    //     checkbox.addEventListener('change', updateSources);
+    // });
+    document.addEventListener("DOMContentLoaded", function() {
+    // Get reference to the source input field
+    var sourceInput = document.getElementById("sourceInput");
+
+    // Get reference to all source options
+    var sourceOptions = document.querySelectorAll(".source-option");
+
+    // Set placeholder text based on selected source option
+    sourceOptions.forEach(function(option) {
+        option.addEventListener("click", function() {
+            var selectedValue = option.getAttribute("data-value");
+            sourceInput.placeholder = selectedValue.charAt(0).toUpperCase() + selectedValue.slice(1);
         });
-        sourcesInput.value = selectedSources.join(', ');
-    }
-
-    document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', updateSources);
     });
+});
+
 
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent form submission
 
         const keywords = document.querySelector('input[name="job"]').value;
         const location = document.querySelector('input[name="location"]').value;
-
-        const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
-        const selectedSources = [];
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedSources.push(checkbox.value);
-            }
-        });
-
-        if (selectedSources.includes('linkedin')) {
+        const sourceElement = document.querySelector('input[name="sourceInput"]').value;
+        
+        if (sourceElement === 'LinkedIn' || sourceElement==='LINKEDIN' || sourceElement==='linkedin' || sourceElement==='Linkdin' || sourceElement==='linkdin' ) {
             const url = `http://localhost:8080/api/ljobs/search?keywords=${encodeURIComponent(keywords)}&location=${encodeURIComponent(location)}`;
             const xhr = new XMLHttpRequest();
             xhr.open('GET', url);
