@@ -170,6 +170,9 @@
 <div id="Subscribe">
     <!-- Subscription button will be dynamically generated here -->
 </div>
+<div id="Working">
+    <!-- Working button will be dynamically generated here -->
+</div>
 <script>
     // function showDropdown() {
     //     document.getElementById("dropdown-content").style.display = "block";
@@ -233,6 +236,11 @@
                 console.log('User is a member');
                 console.log('Displaying jobs from other sources');
                 console.log('We are currently working on this feature. Please check back later.');
+                const workingDiv = document.getElementById('Working');
+                workingDiv.innerHTML = `
+                    <h2>You are a subscribed User</h2>
+                    <p>We are currently working on this feature. Please check back later.</p>
+                `;
             } else {
                 const tableContainer = document.getElementById('table-container');
                 tableContainer.style.pointerEvents = 'none';
