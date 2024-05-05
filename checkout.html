@@ -3,10 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Subscription Bill</title>
+    <style>
+        body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+#modal {
+ justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column
+}
+.bill-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tfoot td {
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+    </style>
 </head>
 <body>
+    <div id="modal">
+    <div class="bill-container">
+    <h3>Bill</h3>
+    <table>
+        <thead>
+            <td>Item</td>
+            <td>Price</td>
+        </thead>
+        <tr>
+            <td>Indeed</td>
+            <td>4 Rs</td>
+        </tr>
+        <tr>
+            <td>Naukri</td>
+            <td>4 Rs</td>
+        </tr>
+        <tr>
+            <td>Gst</td>
+            <td>2 Rs</td>
+        </tr>
+        <tfoot>
+            <td>Total</td>
+            <td>10 Rs</td>
+        </tfoot>
+    </table>
+    </div>
+    <div id="rzp-button-container">
     <button id="rzp-button1">Pay with Razorpay</button>
+    </div>
+    </div>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 keyId = localStorage.getItem("keyId");
@@ -52,7 +139,6 @@ xhr.onreadystatechange = function () {
                         console.log("Membership updated successfully!");
                     } else {
                         console.error("Error updating membership:", updateMembershipXhr.status);
-                        alert("Membership update failed. Please try again.");
                     }
                 }
             };

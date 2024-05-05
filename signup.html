@@ -6,190 +6,142 @@
     <link rel="stylesheet" href="./styles.css" />
     <title>Job Application Signup</title>
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            min-height: 100vh;
-            background-color: #ffffff;
-        }
+        /* Style for header */
+header {
+    text-align: center;
+    background-color: #007bff; /* Header background color */
+    color: #fff; /* Header text color */
+    padding: 20px 0;
+}
 
-        main {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            width: 100%;
-            padding: 20px;
-        }
+/* Style for h1 in header */
+header h1 {
+    margin: 0;
+}
 
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 40%;
-            height: 90%;
-            overflow: hidden;
-            z-index: -1; /* Ensure the video is behind other content */
-        }
+/* Style for main */
+main {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: calc(100vh - 100px); /* Adjust the header height */
+}
 
-        video {
-            min-width: 6%;
-            min-height: 70%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+/* Style for form container */
+.form-container {
+    width: 80%;
+    max-width: 500px; /* Adjust as needed */
+    background-color: #f9f9f9; /* Form container background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Form container shadow */
+}
 
-        .form-container {
-            max-height: 85vh; /* Maximum height of the form container */
-            overflow-y: auto; /* Enable vertical scrolling */
-            width: 100%;
-            max-width: 580px; /* Set maximum width for better readability */
-        }
+/* Style for form panel */
+.panel.register {
+    text-align: center;
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 300px;
-            font-size: 28px;
-            font-weight: bold;
-        }
+/* Style for form elements */
+form {
+    display: flex;
+    flex-direction: column;
+}
 
-        .panel {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
+form label {
+    margin-bottom: 8px;
+}
 
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form button {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+form button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        label {
-            margin-bottom: 10px;
-        }
+form button:hover {
+    background-color: #0056b3; /* Button hover background color */
+}
+#buttonsContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        input[type="number"],
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+    form {
+        background-color: #fff;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        button {
-            background-color: #04AA6D;
-            color: white;
-            cursor: pointer;
-        }
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    label {
+        display: block;
+        font-weight: bold;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 20px;
-        }
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 
-        footer p {
-            margin-bottom: 5px;
-        }
-        header {
-            background-color: #fff;
-            padding: 0px 3px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; /* Ensure the header stays above other content */
-        }
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-        header img.logo {
-            max-width: 90px;
-            height: auto;
-        }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #04AA6D;
-        }
-
+    hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+    }
     </style>
 </head>
 <body>
     <header>
-        <!-- Logo -->
-        <div>
-            <img src="job-recruitment-high-resolution-logo-transparent.png" alt="Logo" class="logo">
-        </div>
-        <!-- Navigation -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <!-- Add other navigation links here -->
-            </ul>
-        </nav>
+        <h1>Job Application Signup</h1>
     </header>
   
-    <main>
-        <div class="video-container">
-            <video autoplay loop muted>
-                <source src="WhatsApp Video 2024-04-20 at 14.20.35_cd87362e.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <!-- Add another video container -->
-        <div class="video-container" style="left: 60%;">
-            <video autoplay loop muted>
-                <source src="WhatsApp Video 2024-04-20 at 15.41.52_4cf50264.mp4" type="video/mp4"> <!-- Update the source with your video file -->
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        
+    <main>        
         <div class="form-container">
             <!-- Signup Form -->
             <div class="panel register">
@@ -217,21 +169,21 @@
                     </label>
 
                     <div id="educationFields"></div> <!-- Container for education fields -->
+                    <div id="buttonsContainer">
                     <button type="button" onclick="addEducation()">+ Add Education</button>
-
-                    <div id="experienceFields"></div> <!-- Container for experience fields -->
-                    <button type="button" onclick="addExperience()">+ Add Experience</button>
-
                     <button type="button" onclick="undoAddEducation()">Undo Education</button>
+                    </div>
+                    <div id="experienceFields"></div> <!-- Container for experience fields -->
+                    <div id="buttonsContainer">
+                    <button type="button" onclick="addExperience()">+ Add Experience</button>
                     <button type="button" onclick="undoAddExperience()">Undo Experience</button>
-                
+                    </div>
                     <button type="submit">Sign Up</button>
                 </form>
+                <h4>Already a member? <a href="login.html">Login</a></h4>
             </div>
         </div>
     </main>
-
-   
 
     <script>
         let educationHistory = [];

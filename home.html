@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home Page</title>
 <style>
+    #sendOrderButton {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    #sendOrderButton:hover {
+        background-color: #0056b3;
+    }
   /* Header styles */
   header {
     background-color: #ffffff;
@@ -140,20 +153,15 @@
 </head>
 <body>
 
-<!-- Header -->
 <header>
-    <!-- <img src="job-recruitment-high-resolution-logo-transparent.png" alt="Job Recruitment Logo" class="logo"> -->
-    
-    <!-- Right-aligned dropdown -->
+    <h4>Welcome to Job Recruitment</h4>
     <div class="dropdown-right">
-        <!-- <img src="Avatar-PNG-Free-Download.png" alt="Avatar" class="avatar"> -->
+        <img alt="Avatar" class="avatar">
         <div class="dropdown-right-content">
-            <a href="signin.html">My Account</a>
-            <a href="index.html">Logout</a>
+            <a href="#">Profile</a>
+            <a href="login.html" id="logoutLink">Logout</a>
         </div>
-    </div>
 </header>
-
 <!-- Search Form with Dropdown Menu -->
 <div class="search-form">
     <form id="searchForm">
@@ -174,25 +182,6 @@
     <!-- Working button will be dynamically generated here -->
 </div>
 <script>
-    // function showDropdown() {
-    //     document.getElementById("dropdown-content").style.display = "block";
-    // }
-
-    // function updateSources() {
-    //     const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
-    //     const sourcesInput = document.getElementById('sources');
-    //     const selectedSources = [];
-    //     checkboxes.forEach(checkbox => {
-    //         if (checkbox.checked) {
-    //             selectedSources.push(checkbox.value);
-    //         }
-    //     });
-    //     sourcesInput.value = selectedSources.join(', ');
-    // }
-
-    // document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach(checkbox => {
-    //     checkbox.addEventListener('change', updateSources);
-    // });
     document.addEventListener("DOMContentLoaded", function() {
     // Get reference to the source input field
     var sourceInput = document.getElementById("sourceInput");
@@ -247,7 +236,7 @@
                 tableContainer.style.opacity = '0.1';
                 const subscribeDiv = document.getElementById('Subscribe');
                 subscribeDiv.innerHTML = `
-                    <button id="sendOrderButton">Send Order</button>
+                    <button id="sendOrderButton">Subscribe</button>
                     <div id="order-status"></div>
                 `;
             }
@@ -334,6 +323,23 @@
         tableContainer.innerHTML = ''; // Clear previous content
         tableContainer.appendChild(table);
     }
+
+    function logoutUser() {
+        // Clear local storage
+        localStorage.clear();
+        
+        // Clear session storage
+        sessionStorage.clear();
+        
+        // Redirect to login page or perform any other necessary actions
+        // window.location.href = "login.html";
+    }
+
+    // Add event listener to the logout link
+    document.getElementById("logoutLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        logoutUser();
+    });
 </script>
 </body>
 </html>
